@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background_light_gray">#F5F5F5</color>
+    <color name="background_ivory">#FFFFF0</color>
+    <color name="background_beige">#F5F5DC</color>
+    <color name="background_snow">#FFFAFA</color>
+    <color name="background_gainsboro">#DCDCDC</color>
+    <color name="heading_charcoal_gray">#333333</color>
+    <color name="heading_dark_slate_gray">#2F4F4F</color>
+    <color name="heading_gunmetal">#2A2A2A</color>
+    <color name="heading_onyx">#353839</color>
+    <color name="heading_midnight_blue">#003366</color>
+</resources>
