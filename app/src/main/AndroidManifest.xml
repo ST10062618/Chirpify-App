@@ -13,6 +13,14 @@
         android:theme="@style/Theme.Chirpify"
         tools:targetApi="31">
         <activity
+            android:name=".AddObservations"
+            android:exported="false"
+            android:theme="@style/Theme.Chirpify" />
+        <activity
+            android:name=".viewBirdsObservation"
+            android:exported="false"
+            android:theme="@style/Theme.Chirpify" />
+        <activity
             android:name=".Settings"
             android:exported="false"
             android:theme="@style/Theme.Chirpify" />
