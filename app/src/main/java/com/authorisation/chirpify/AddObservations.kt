@@ -1,41 +1,26 @@
 package com.authorisation.chirpify
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.authorisation.chirpify.databinding.ActivityAddObservationsBinding
+import android.widget.Button
 
 class AddObservations : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityAddObservationsBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_add_observations)
 
-        binding = ActivityAddObservationsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // Initialize the Save Button
+        val saveObservationButton = findViewById<Button>(R.id.saveObservationButton)
 
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_add_observations)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+        // Set up the click listener
+        saveObservationButton.setOnClickListener {
+            // Start Homepage activity
+            val intent = Intent(this, Homepage::class.java)
+            startActivity(intent)
+            // Optional: Finish current activity to prevent going back to it
+            finish()
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_add_observations)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
     }
 }

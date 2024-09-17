@@ -52,8 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Max Distance (km)"
-            android:textColor="#FFFFFF"
             android:textColorHint="#FF724C"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,15 +68,15 @@
         app:layout_constraintTop_toBottomOf="@id/distanceLayout"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Save Observation Button -->
+    <!-- Save Changes Button -->
     <Button
-        android:id="@+id/saveObservationButton"
+        android:id="@+id/saveChangesButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="32dp"
         android:backgroundTint="#FF724C"
-        android:text="Save Bird Observation"
+        android:text="Save Changes"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -98,9 +98,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:cornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/saveObservationButton"
+        app:layout_constraintTop_toBottomOf="@id/saveChangesButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

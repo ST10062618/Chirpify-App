@@ -1,41 +1,27 @@
 package com.authorisation.chirpify
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.authorisation.chirpify.databinding.ActivityViewBirdsObservationBinding
+import android.widget.Button
+import android.widget.ListView
 
-class viewBirdsObservation : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityViewBirdsObservationBinding
+class ViewBirdsObservation : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_view_birds_observation)
 
-        binding = ActivityViewBirdsObservationBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // Initialize the Return to Home Button
+        val returnHomeButton = findViewById<Button>(R.id.returnHomeButton)
 
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_view_birds_observation)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+        // Set up the click listener
+        returnHomeButton.setOnClickListener {
+            // Start Homepage activity
+            val intent = Intent(this, Homepage::class.java)
+            startActivity(intent)
+            // Optional: Finish current activity to prevent going back to it
+            finish()
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_view_birds_observation)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
     }
 }

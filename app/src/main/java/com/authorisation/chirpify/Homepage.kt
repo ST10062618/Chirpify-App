@@ -1,35 +1,48 @@
 package com.authorisation.chirpify
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.authorisation.chirpify.databinding.ActivityHomepageBinding
+import android.widget.Button
 
 class Homepage : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityHomepageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_homepage)
 
-        binding = ActivityHomepageBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // Initialize buttons using findViewById
+        val addObservationButton = findViewById<Button>(R.id.addObservationButton)
+        val viewObservationButton = findViewById<Button>(R.id.viewObservationButton)
+        val signOutButton = findViewById<Button>(R.id.signOutButton)
+        val settingsButton = findViewById<Button>(R.id.settingsButton)
 
-        setSupportActionBar(binding.toolbar)
+        // Set click listener to navigate to SettingsActivity
+        settingsButton.setOnClickListener {
+            val intent = Intent(this, Settings::class.java)
+            startActivity(intent)
+        }
 
-        val navController = findNavController(R.id.nav_host_fragment_content_homepage)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        // Set button click listeners
+        addObservationButton.setOnClickListener {
+            val intent = Intent(this, AddObservations::class.java)
+            startActivity(intent)
+        }
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+        viewObservationButton.setOnClickListener {
+            val intent = Intent(this, ViewBirdsObservation::class.java)
+            startActivity(intent)
+        }
+
+        signOutButton.setOnClickListener {
+            val intent = Intent(this, SignIn::class.java)
+            startActivity(intent)
+            finish() // Optional: Call finish() to remove this activity from the back stack
         }
     }
 

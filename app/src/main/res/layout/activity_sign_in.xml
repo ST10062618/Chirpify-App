@@ -101,6 +101,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Not Registered? Text -->
+    <TextView
+        android:id="@+id/notRegisteredText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not Registered? Sign Up Here"
+        android:textColor="#FF724C"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/createAccountText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+
     <!-- Forgot Password Text -->
     <TextView
         android:id="@+id/forgotPasswordText"
