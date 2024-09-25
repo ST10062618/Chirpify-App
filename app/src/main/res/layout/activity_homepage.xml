@@ -14,9 +14,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Title -->
     <TextView
@@ -32,58 +32,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <!-- Map View -->
+    <!-- MapBox View -->
     <FrameLayout
         android:id="@+id/mapView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/titleText"
-        app:layout_constraintBottom_toTopOf="@id/filterSection"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="16:9" />
 
-    <!-- Filter Section -->
-    <LinearLayout
-        android:id="@+id/filterSection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@id/addObservationButton">
-
-        <!-- Distance Filter -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/distanceLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxStrokeColor="#FF724C"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusBottomEnd="10dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/distanceInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Max Distance (km)"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FF724C"
-                android:textSize="16sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Toggle System -->
-        <ToggleButton
-            android:id="@+id/systemToggle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="Metric"
-            android:textOff="Imperial"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-
+    <!-- Settings Button -->
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
@@ -94,16 +54,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
-
-
-    <!-- Add Observation Button -->
+    <!-- Add Bird Observation Button -->
     <Button
         android:id="@+id/addObservationButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginHorizontal="32dp"
         android:backgroundTint="#FF724C"
         android:text="Add Bird Observation"
@@ -111,12 +69,11 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:cornerRadius="16dp"
-        app:layout_constraintBottom_toTopOf="@id/viewObservationButton"
+        app:layout_constraintTop_toBottomOf="@id/mapView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-    <!-- View Observation Button -->
+    <!-- View Bird Observations Button -->
     <Button
         android:id="@+id/viewObservationButton"
         android:layout_width="0dp"
@@ -129,7 +86,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:cornerRadius="16dp"
-        app:layout_constraintBottom_toTopOf="@id/signOutButton"
+        app:layout_constraintTop_toBottomOf="@id/addObservationButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -146,7 +103,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:cornerRadius="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewObservationButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

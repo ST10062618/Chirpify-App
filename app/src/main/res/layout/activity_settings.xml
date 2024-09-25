@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:hint="Max Distance (km)"
             android:textColorHint="#FF724C"
-            android:textColor="#FFFFFF"
+            android:textColor="#FF000000"
             android:textSize="16sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
