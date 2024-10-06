@@ -24,7 +24,7 @@
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chirpify"
+        android:text="Nearby Hotspots"
         android:textColor="@color/heading_onyx"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -33,15 +33,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <!-- Hotspots List Button -->
+    <!-- Add Hotspot Button -->
     <Button
-        android:id="@+id/viewHotspotsButton"
+        android:id="@+id/addHotspotButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="32dp"
         android:backgroundTint="#FF724C"
-        android:text="View Nearby Hotspots"
+        android:text="Add Hotspot"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -50,73 +50,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Add Bird Observation Button -->
+    <!-- Refresh eBird Hotspots Button -->
     <Button
-        android:id="@+id/addObservationButton"
+        android:id="@+id/refreshEBirdHotspotsButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="32dp"
         android:backgroundTint="#FF724C"
-        android:text="Add Bird Observation"
+        android:text="Refresh eBird Hotspots"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
         app:cornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/viewHotspotsButton"
+        app:layout_constraintTop_toBottomOf="@id/addHotspotButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- View Bird Observations Button -->
-    <Button
-        android:id="@+id/viewObservationButton"
+    <!-- Hotspots List View -->
+    <ListView
+        android:id="@+id/hotspotsListView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="32dp"
-        android:backgroundTint="#FF724C"
-        android:text="View Bird Observations"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:cornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/addObservationButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Settings Button -->
-    <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="32dp"
-        android:backgroundTint="#FF724C"
-        android:text="Settings"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:cornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/viewObservationButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Sign Out Button -->
-    <Button
-        android:id="@+id/signOutButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="32dp"
-        android:backgroundTint="#FF724C"
-        android:text="Sign Out"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:cornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/settingsButton"
+        app:layout_constraintTop_toBottomOf="@id/refreshEBirdHotspotsButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/backToHomepageButton"/>
+
+    <!-- Back to Homepage Button -->
+    <Button
+        android:id="@+id/backToHomepageButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp"
+        android:backgroundTint="#FF724C"
+        android:text="Back to Homepage"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <!-- Observations List (Placeholder) -->
+    <!-- Observations List -->
     <ListView
         android:id="@+id/observationsListView"
         android:layout_width="0dp"
@@ -30,7 +30,9 @@
         app:layout_constraintTop_toBottomOf="@id/viewObservationsTitle"
         app:layout_constraintBottom_toTopOf="@id/returnHomeButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
 
     <!-- Return Home Button -->
     <Button

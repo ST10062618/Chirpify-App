@@ -21,6 +21,7 @@ class Homepage : AppCompatActivity() {
         val viewObservationButton = findViewById<Button>(R.id.viewObservationButton)
         val signOutButton = findViewById<Button>(R.id.signOutButton)
         val settingsButton = findViewById<Button>(R.id.settingsButton)
+        val viewHotspotsButton = findViewById<Button>(R.id.viewHotspotsButton)
 
         // Set click listener to navigate to SettingsActivity
         settingsButton.setOnClickListener {
@@ -35,7 +36,7 @@ class Homepage : AppCompatActivity() {
         }
 
         viewObservationButton.setOnClickListener {
-            val intent = Intent(this, ViewBirdsObservation::class.java)
+            val intent = Intent(this, viewBirdsObservation::class.java)
             startActivity(intent)
         }
 
@@ -43,6 +44,12 @@ class Homepage : AppCompatActivity() {
             val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
             finish() // Optional: Call finish() to remove this activity from the back stack
+        }
+
+        // Set click listener for View Hotspots button
+        viewHotspotsButton.setOnClickListener {
+            val intent = Intent(this, HotspotsList::class.java) // Start HotspotsList activity
+            startActivity(intent)
         }
     }
 
