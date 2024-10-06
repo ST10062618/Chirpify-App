@@ -1,13 +1,19 @@
 package com.authorisation.chirpify
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapFragment
@@ -22,6 +28,12 @@ class AddObservations : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var saveObservationButton: Button
     private lateinit var map: GoogleMap
     private var selectedLocation: LatLng? = null // Store the selected location
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var currentLocation: LatLng? = null // Store the current location
+
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +43,9 @@ class AddObservations : AppCompatActivity(), OnMapReadyCallback {
         speciesInput = findViewById(R.id.speciesInput)
         notesInput = findViewById(R.id.notesInput)
         saveObservationButton = findViewById(R.id.saveObservationButton)
+
+        // Initialize FusedLocationProviderClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         // Initialize the map fragment
         val mapFragment = fragmentManager.findFragmentById(R.id.map) as MapFragment
@@ -45,14 +60,41 @@ class AddObservations : AppCompatActivity(), OnMapReadyCallback {
     // OnMapReadyCallback implementation
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        val johannesburg = LatLng(-26.2041, 28.0473) // Default location
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(johannesburg, 10f))
+        getCurrentLocation()
 
         // Set a click listener to place a marker on the map
         map.setOnMapClickListener { latLng ->
             selectedLocation = latLng
             map.clear() // Clear previous markers
             map.addMarker(MarkerOptions().position(latLng).title("Selected Location"))
+        }
+    }
+
+    private fun getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        }
+
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                currentLocation = LatLng(location.latitude, location.longitude)
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation!!, 10f))
+                map.addMarker(MarkerOptions().position(currentLocation!!).title("Your Location"))
+            } else {
+                Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                getCurrentLocation() // Permission granted, get the current location
+            } else {
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

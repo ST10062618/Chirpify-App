@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     // Retrofit dependencies
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
     implementation ("com.google.android.gms:play-services-maps:18.1.0")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")  // Retrofit library
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")

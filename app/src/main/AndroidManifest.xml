@@ -51,10 +51,6 @@
             android:exported="false"
             android:theme="@style/Theme.Chirpify" />
         <activity
-            android:name=".AddHotspots"
-            android:exported="false"
-            android:theme="@style/Theme.Chirpify" />
-        <activity
             android:name=".viewBirdsObservation"
             android:exported="false"
             android:theme="@style/Theme.Chirpify" />
