@@ -10,7 +10,7 @@
     <!-- Required for Google Maps API -->
     <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyAJDslmDAkTVbjpAHDFOS_2spJVyPq1N3I" /> <!-- Replace with your actual API key -->
+        android:value="AIzaSyAJDslmDAkTVbjpAHDFOS_2spJVyPq1N3I" />
 
     <application
         android:allowBackup="true"
@@ -33,7 +33,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Other Activities -->
         <activity
             android:name=".Homepage"
             android:exported="false"
@@ -63,4 +62,5 @@
             android:exported="false"
             android:theme="@style/Theme.Chirpify" />
     </application>
+
 </manifest>
