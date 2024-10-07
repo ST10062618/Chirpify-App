@@ -9,6 +9,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import android.widget.Toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -76,7 +77,10 @@ class HotspotsList : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             } else {
                 Log.e("HotspotsList", "No hotspots found or error occurred.")
+                // Display a toast message when no hotspots are found
+                Toast.makeText(this@HotspotsList, "No hotspots near you. Please try again.", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 }

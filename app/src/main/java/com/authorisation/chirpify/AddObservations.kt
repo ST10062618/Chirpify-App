@@ -1,75 +1,85 @@
 package com.authorisation.chirpify
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.LocationServices
 import java.util.*
 
-class AddObservations : AppCompatActivity(), OnMapReadyCallback {
+class AddObservations : AppCompatActivity() {
 
     private lateinit var speciesInput: EditText
     private lateinit var notesInput: EditText
     private lateinit var latitudeInput: EditText
     private lateinit var longitudeInput: EditText
     private lateinit var saveObservationButton: Button
-    private lateinit var mMap: GoogleMap
-    private var selectedLatLng: LatLng? = null
+    private lateinit var useCurrentLocationButton: Button
+
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_observations)
 
-        // Initialize inputs and button
+        // Initialize inputs and buttons
         speciesInput = findViewById(R.id.speciesInput)
         notesInput = findViewById(R.id.notesInput)
         latitudeInput = findViewById(R.id.latitudeInput)
         longitudeInput = findViewById(R.id.longitudeInput)
         saveObservationButton = findViewById(R.id.saveObservationButton)
-
-        // Set up the map
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.mapFragment) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        useCurrentLocationButton = findViewById(R.id.useCurrentLocationButton)
 
         // Set click listener for the save button
         saveObservationButton.setOnClickListener {
             saveObservation()
         }
+
+        // Set click listener for using the current location
+        useCurrentLocationButton.setOnClickListener {
+            getCurrentLocation()
+        }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+    private fun getCurrentLocation() {
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        mMap.setOnMapLongClickListener { latLng ->
-            selectedLatLng = latLng
-            mMap.clear()
-            mMap.addMarker(MarkerOptions().position(latLng).title("Selected Location"))
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        }
 
-            // Fill in the latitude and longitude fields
-            latitudeInput.setText(latLng.latitude.toString())
-            longitudeInput.setText(latLng.longitude.toString())
-
-            // Fetch and display the address
-            val geocoder = Geocoder(this, Locale.getDefault())
-            val addresses: List<Address> = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1) ?: emptyList()
-
-            if (addresses.isNotEmpty()) {
-                val address = addresses[0].getAddressLine(0)
-                notesInput.setText("Observed at: $address")
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                latitudeInput.setText(location.latitude.toString())
+                longitudeInput.setText(location.longitude.toString())
+                fetchAndDisplayAddress(location)
+            } else {
+                Toast.makeText(this, "Could not retrieve current location. Please enter coordinates manually.", Toast.LENGTH_SHORT).show()
             }
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed to get location. Please enter coordinates manually.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun fetchAndDisplayAddress(location: Location) {
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val addresses: List<Address> = geocoder.getFromLocation(location.latitude, location.longitude, 1) ?: emptyList()
+
+        if (addresses.isNotEmpty()) {
+            val address = addresses[0].getAddressLine(0)
+            notesInput.setText("Observed at: $address")
         }
     }
 
