@@ -75,11 +75,17 @@ class AddObservations : AppCompatActivity() {
 
     private fun fetchAndDisplayAddress(location: Location) {
         val geocoder = Geocoder(this, Locale.getDefault())
-        val addresses: List<Address> = geocoder.getFromLocation(location.latitude, location.longitude, 1) ?: emptyList()
+        try {
+            val addresses: List<Address> = geocoder.getFromLocation(location.latitude, location.longitude, 1) ?: emptyList()
 
-        if (addresses.isNotEmpty()) {
-            val address = addresses[0].getAddressLine(0)
-            notesInput.setText("Observed at: $address")
+            if (addresses.isNotEmpty()) {
+                val address = addresses[0].getAddressLine(0)
+                notesInput.setText("Observed at: $address")
+            } else {
+                Toast.makeText(this, "No address found for this location.", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Failed to get address. Please use coordinates manually.", Toast.LENGTH_SHORT).show()
         }
     }
 
